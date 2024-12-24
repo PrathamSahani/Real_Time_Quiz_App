@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <title>Create Quiz</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-form {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin: 2px;
+
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-form">
+        <h2 class="text-center text-dark font-weight-bold mb-4">Create Quiz</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" class="form-control">
+                    {% for category in categories %}
+                    <option value="{{ category.gfg_name }}">{{ category.gfg_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question">Question</label>
+                <input type="text" id="question" name="question" class="form-control"
+                    placeholder="Enter the quiz question" required>
+            </div>
+            <div class="form-group">
+                <label for="marks">Marks</label>
+                <input type="number" id="marks" name="marks" class="form-control"
+                    placeholder="Assign marks for the question" required>
+            </div>
+            <div class="form-group">
+                <label>Answers</label>
+                {% for i in "1234"|make_list %}
+                <input type="text" name="answers" class="form-control mb-2" placeholder="Answer option {{ i }}"
+                    required>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="correct_answer">Correct Answer</label>
+                <input type="text" id="correct_answer" name="correct_answer" class="form-control"
+                    placeholder="Enter the correct answer" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Create Quiz</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'index' %}" class="btn btn-home btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

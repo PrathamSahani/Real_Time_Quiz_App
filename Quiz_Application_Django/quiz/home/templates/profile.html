@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+
+    <style>
+        body {
+            font-family: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 40%;
+            margin: 0 auto;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .account-details {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        form input, form button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input:focus {
+            border-color: #4CAF50;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .btn-update {
+            background-color: #4CAF50;
+            color: white;
+            font-family: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 30px 0;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+        }
+        .btn-update:hover {
+            background-color: #45a049;
+        }
+        #update-form {
+            display: none;
+            margin-top: 20px;
+        }
+        .del {
+            display: block;
+            margin-top: 20px;
+            color: #f44336;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .del:hover {
+            text-decoration: underline;
+        }
+        .de{
+            display: block;
+            margin-top: 20px;
+            margin-left: 700px;
+            color: rgb(9, 9, 49);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .de:hover {
+            text-decoration: underline;
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>{{user.username}}'s Profile</h2>
+
+        <!-- Button to toggle form visibility -->
+        <button class="btn-update" onclick="toggleForm()">Update Profile</button>
+
+        <!-- The form for updating profile (initially hidden) -->
+        <div id="update-form">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save changes</button>
+            </form>
+        </div>
+
+        <div class="account-details">
+            <h3>Account Details:</h3>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <a class="del" href="{% url 'delete_account' %}">Delete Account</a>
+    </div>
+    <a class="de" href="{% url 'index' %}" >Back to Home</a>
+       
+
+    <script>
+        // Function to toggle the form visibility
+        function toggleForm() {
+            var form = document.getElementById('update-form');
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

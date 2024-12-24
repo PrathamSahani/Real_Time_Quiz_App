@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <title>All Quizzes</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .btn-home {
+            background-color: #6c757d;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-home:hover {
+            background-color: #5a6268;
+        }
+
+        .table thead th {
+            background-color: #0b315c;
+            color: white;
+            text-align: center;
+        }
+
+        .table tbody td {
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            vertical-align: middle;
+        }
+
+        .btn-sm {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>All Quizzes</h2>
+        <div class="d-flex justify-content-between mb-3">
+            <a style="height: 40px;" href="{% url 'create_quiz' %}" class="btn btn-success">Create New Quiz</a>
+            <a href="{% url 'index' %}" class="btn btn-home">Back to Home</a>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Question</th>
+                    <th>Marks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                <tr>
+                    <td>{{ question.gfg.gfg_name }}</td>
+                    <td>{{ question.question }}</td>
+                    <td>{{ question.marks }}</td>
+                    <td>
+                        <a href="{% url 'edit_quiz' question.uid %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'delete_quiz' question.uid %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No quizzes available. Create a new one!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
